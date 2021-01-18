@@ -46,7 +46,7 @@ export default function Card({ id, name, description, image, price, stock }) {
                         disabled={stock > 0 ? false : true}
                         onClick={handleButton}
                     >
-                        Add to Cart <span>{stock > 0 ? "$ " + price : "Sin Stock"}</span>
+                        {stock > 0 ? "Add to Cart" : "Sin Stock"} <span>{stock > 0 ? "$ " + price : null}</span>
                     </button>
                 </div>
             </div>

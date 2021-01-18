@@ -507,9 +507,9 @@ export const resetPassword = (token, input) => {
 
 
 export const confirmPurchase = (input) => {
-    let { username, email, adress, idOrder } = input;
+    let { username, email, adress, idOrder, idUser } = input;
     return function (dispatch) {
-        axios.post(`${localhost}/order/${idOrder}/complete`, { username, email, adress })
+        axios.post(`${localhost}/order/${idOrder}/complete`, { idUser, username, email, adress })
             .then(data => {
                 alert('Your purchase was made successfully')
                 window.location.replace('/');

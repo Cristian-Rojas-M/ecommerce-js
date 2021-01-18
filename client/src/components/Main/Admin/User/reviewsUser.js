@@ -52,11 +52,11 @@ function ReviewsUser ({ match }) {
         <>
             <div className={`add-Review-${input.review}`}>
                 <div className='add-ReviewBox'>
+                    <button className='closeBtn' name='review' onClick={handleToggle}>&times;</button>
                     <form onSubmit={handleSubmit} className='form'>
                         <div>
                             <label>Commentary</label>
                             <input 
-                                autoComplete="off"
                                 type='textarea'
                                 name='commentary'
                                 value={input.commentary}
@@ -75,7 +75,7 @@ function ReviewsUser ({ match }) {
                             <input id='radio5' type='radio' value='1' name='rating' onClick={handleInputChange}/>
                             <label  for='radio5'>&#9733;</label>
                         </p>
-                        <input type='submit' value='Edit Review' />
+                        <input type='submit' value='Edit Review' className='input' disabled={!input.commentary || !input.rating} />
                     </form>
                 </div>
             </div>
@@ -86,6 +86,7 @@ function ReviewsUser ({ match }) {
                     <th className='commentary'>Commentary</th>
                     <th className='rating'>Rating</th>
                     <th>Product</th>
+                    <th>Actions</th>
                 </tr>
                 {
                     reviews && reviews.map(r => (
@@ -95,7 +96,9 @@ function ReviewsUser ({ match }) {
                             <td className='commentary'>{r.commentary}</td>
                             <td className='rating'>{r.rating} star(s)</td>    
                             <td>{r.product?.name}</td>  
-                            <button name='review' value={r.id} onClick={handleToggle}>Edit Review</button>  
+                            <td>
+                                <button name='review' value={r.id} onClick={handleToggle}>Edit Review</button>  
+                            </td>
                         </tr>
                     ))
                 }

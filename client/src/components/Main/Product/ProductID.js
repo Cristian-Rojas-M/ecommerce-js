@@ -14,6 +14,7 @@ export default function ProductID({ match })  {
     }, [dispatch]);
 
     if(!details) return (<h2>Loading...</h2>)
+    console.log(reviews)
     return (
         <div className='productID'>
             <div className='box'>

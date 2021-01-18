@@ -166,7 +166,7 @@ server.delete('/:idOrder/product/:idProduct', async (req, res, next) => {
 server.post('/:idOrder/complete',  async (req, res, next) => {
     try {
         const { idOrder } = req.params;
-        const { username, email, adress } = req.body;
+        const { username, email, adress, idUser } = req.body;
         let total = 0;
         let arr = [];
         let quanty=0;
@@ -190,6 +190,7 @@ server.post('/:idOrder/complete',  async (req, res, next) => {
         await Order.update({state:"complete"}, { where: { id: idOrder } });
 
         let obj = {
+            idUser,
             email,
             username,
             adress,

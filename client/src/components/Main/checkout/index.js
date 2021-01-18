@@ -9,6 +9,7 @@ function Checkout () {
     const [ input, setInput ] = useState({
       adress: '',
       email: user?.email,
+      idUser: user?.id,
       username: user?.username,
       idOrder: order?.id
     });
@@ -19,6 +20,7 @@ function Checkout () {
       setInput({
         ...input,
         email: user?.email,
+        idUser: user?.id,
         username: user?.username,
         idOrder: order?.id
       })

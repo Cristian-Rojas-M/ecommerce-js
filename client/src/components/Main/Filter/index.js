@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { orderByFilt, getProductToOrder, createOrderToUser, deleteOrder, deleteProductToOrder } from '../../../redux/actions';
 import { ADD_PRODUCT_TO_ORDER } from '../../../redux/constants';
 import { Link } from 'react-router-dom';
+import carrito from '../../../assets/img/carrito.png';
 
 
 import '../Cart/Cart.scss';
@@ -57,7 +58,7 @@ function Filter() {
             {/** Empieza nuestro carrito*/}
             <div className="Carrito">
                 <button className='buttonCart' onClick={handleToggle}>
-                    <img src='https://icons555.com/images/icons-green/image_icon_shopping_cart_pic_512x512.png' name='openCart' />
+                    <img src={carrito} name='openCart' />
                 </button>
                 <div className={`deleteCart-${input.openCart}`}>
                     <div className='deleteCartBox'>
@@ -95,28 +96,30 @@ function Filter() {
                                     })
                                 }
                             </ul>
-                            <div className='total-cart'>
-                                <span>TOTAL: $ {cont}</span>
-                                <button value={cart?.id} onClick={(e) => {
-                                    if(!cart?.id) {
-                                        window.localStorage.removeItem('cart')
-                                    } else {
-                                        dispatch(deleteOrder(e.target.value))
+                            <div>
+                                <div className='total-cart'>
+                                    <span>TOTAL: $ {cont}</span>
+                                    <button value={cart?.id} onClick={(e) => {
+                                        if(!cart?.id) {
+                                            window.localStorage.removeItem('cart')
+                                        } else {
+                                            dispatch(deleteOrder(e.target.value))
+                                        }
+                                        dispatch({
+                                            type:ADD_PRODUCT_TO_ORDER,
+                                            payload:[]
+                                        })
+                                    }}>Empty Cart</button>
+                                </div>
+                                    {
+                                        user?(  <Link to='/checkout' className='link'>
+                                                    <button className='btn-check' onClick={e => { }}>Checkout</button>
+                                                </Link>):
+                                                (<Link to='/login' className='link'>
+                                                    <button className='btn-check' onClick={e => { }}>Login</button>
+                                                </Link>)
                                     }
-                                    dispatch({
-                                        type:ADD_PRODUCT_TO_ORDER,
-                                        payload:[]
-                                    })
-                                }}>Empty Cart</button>
                             </div>
-                                {
-                                    user?(  <Link to='/checkout' className='link'>
-                                                <button className='btn-check' onClick={e => { }}>Checkout</button>
-                                            </Link>):
-                                            (<Link to='/login' className='link'>
-                                                <button className='btn-check' onClick={e => { }}>Login</button>
-                                            </Link>)
-                                }
                         </div>
                     </div>
                 </div>
